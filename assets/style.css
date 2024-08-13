@@ -25,14 +25,15 @@
 .calculadora{
     width: 450px;
     background-color: #1A1A1A;
-    overflow: hidden;
+    border-radius: 15px; 
+    border-bottom-right-radius:0px ;
 }
 
 .calculadora .display{
     height: 100px;
     width: 100%;
     background-color:#000 ;
-    border-top-left-radius: 20px; ;
+    border-top-left-radius: 15px; 
 }
 
 .calculadora .buttons{
@@ -42,7 +43,8 @@
 }
 .buttons .numbers,
 .buttons .operators{
-    height: 50px;
+    height: 75px;
     text-align: center;
-    padding: 15px;
+    line-height: inherit;
+    
 }
