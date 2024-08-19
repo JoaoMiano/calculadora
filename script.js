@@ -18,14 +18,14 @@ class Calculator {
             return;
         }
 
-        this.currentOperation = digit
+        this.currentOperation = digit;
         this.updateScreen();
     }
 
     //processamento das operações
     processOperation(operation) {
     // Se o display atual está vazio
-    if (this.currentText.innerText === "") {
+    if (this.currentText.innerText === "" && operation === "CE") {
         // Se a operação é uma troca de operação
         if (this.previousText.innerText !== "") {
             this.changeOperation(operation);
@@ -59,19 +59,34 @@ class Calculator {
             this.updateScreen(operationValue, operation, current, previous);
            
             break;
+        case "DEL":
+            this.delOperation()
+            break;
+
+        case "C":
+            this.cOperation()
+            break;
+
+        case "CE":
+            this.ceOperation()
+            break;
+
+        case "=":
+            this.equalOperation()
+            break;
         default:
             return;
+        
     }
 
 }
 
 
-    //altera os valores do display
     updateScreen(
         operationValue = null,
         operation = null,
-        previous = null,
-        current = null
+        current = null,
+        previous = null
     ) {
         if (operationValue === null) {
             this.currentText.innerText += this.currentOperation;
@@ -93,6 +108,27 @@ class Calculator {
 
         this.previousText.innerText = this.previousText.innerText.slice(0, -1) + operation
     }
+    //deleta o ultimo numero
+    delOperation(){
+        this.currentText.innerText = this.currentText.innerText.slice(0, -1)
+    }
+    //limpa o campo atual
+    ceOperation(){
+        this.currentText.innerText = "";
+    }
+    //limpa todos os campos
+    cOperation(){
+        this.currentText.innerText = "";
+        this.previousText.innerText = "";
+    }
+    //Exibe o resultado
+    equalOperation(){
+        const operation = this.previousText.innerText.split(" ")[1];
+
+        this.processOperation(operation)
+        this.currentText.innerText = this.previousText.innerText.split(" ")[0];
+        this.previousText.innerText = "";
+    }
 };
 
 const calc = new Calculator(previous, current);
@@ -101,7 +137,7 @@ const calc = new Calculator(previous, current);
 //Adiciona um evento para cada elemnto dentro do array buttons que retorna o valor do botão clicado
 buttons.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-        let value = e.target.innerText;
+        const value = e.target.innerText;
 
 
         //verifica se o botão clicado é um numero ou uma operação
