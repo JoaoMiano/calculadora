@@ -81,3 +81,13 @@ body{
 #area-buttons #equal:hover{
     background-color:#db7602;
 }
+
+@media(max-width: 450px){
+    #calc{
+        width: 300px;
+    }
+
+    #area-buttons button{
+        height: 60px;
+    }
+}
